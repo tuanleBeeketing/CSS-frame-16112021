@@ -1,0 +1,160 @@
+// Grid
+
+@mixin make-container($gutter: $grid-gutter-width) {
+    width: 100%;
+    padding-right: $gutter/2;
+    padding-left:  $gutter/2;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@mixin make-row($gutter: $grid-gutter-width) {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -$gutter / 2;
+    margin-left: -$gutter / 2;
+}
+
+@mixin make-col-ready($gutter: $grid-gutter-width) {
+    position: relative;
+
+    // Prevent columns from becoming too narrow when at smaller grid tiers by
+    // always setting `width: 100%;`. This works because we use `flex` values
+    // later on to override this initial width.
+    width: 100%;
+    padding-right: $gutter / 2;
+    padding-left: $gutter / 2;
+}
+
+@mixin make-col($size, $column-num: $number-of-column) {
+    flex: 0 0 percentage($size / $column-num);
+
+    // Add a `max-width` to ensure content within each column does not blow out
+    // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
+    // do not appear to require this.
+    max-width: percentage($size / $column-num);
+}
+
+@mixin make-col-offset($size, $column-num: $number-of-column) {
+    $num: $size / $column-num;
+
+    margin-left: if($num == 0, 0, percentage($num));
+}
+
+@mixin make-grid-columns($column-num: $number-of-column, $gutter: $grid-gutter-width, $breakpoint-list: $grid-breakpoint-list) {
+    // Common properties for all breakpoints
+    %grid-column {
+        position: relative;
+        width: 100%;
+        padding-right: $gutter / 2;
+        padding-left: $gutter / 2;
+    }
+
+    @each $breakpoint in map-keys($breakpoint-list) {
+        $infix: breakpoint-infix($breakpoint, $breakpoint-list);
+
+        // Allow columns to stretch full width below their breakpoints
+        @for $i from 1 through $column-num {
+            .col#{$infix}-#{$i} {
+                @extend %grid-column;
+            }
+        }
+
+        .col#{$infix},
+        .col#{$infix}-auto {
+            @extend %grid-column;
+        }
+
+        @include media-breakpoint-up($breakpoint, $breakpoint-list) {
+            // Provide basic `.col-{bp}` classes for equal-width flexbox columns
+            .col#{$infix} {
+                flex-basis: 0;
+                flex-grow: 1;
+                max-width: 100%;
+            }
+
+            .col#{$infix}-auto {
+                flex: 0 0 auto;
+                width: auto;
+                max-width: 100%; // Reset earlier grid tiers
+           
+            }
+
+            @for $i from 1 through $column-num {
+                .col#{$infix}-#{$i} {
+                    @include make-col($i, $columns);
+                }
+            }
+
+            .order#{$infix}-first {
+                order: -1;
+            }
+
+            .order#{$infix}-last {
+                order: $columns + 1;
+            }
+
+            @for $i from 0 through $column-num {
+                .order#{$infix}-#{$i} {
+                    order: $i;
+                }
+            }
+
+            // `$columns - 1` because offsetting by the width of an entire row isn't possible
+            @for $i from 0 through $column-num - 1 {
+                @if not ($infix == "" and $i == 0) {
+                    // Avoid emitting useless .offset-0
+                    .offset#{$infix}-#{$i} {
+                        @include make-col-offset($i, $column-num);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin media-breakpoint-up($name, $breakpoint-list: $grid-breakpoint-list) {
+    $max: breakpoint-max($name, $breakpoint-list);
+
+    @if $max < 480 {
+        @media (max-width: 480) {
+            @content;
+        }
+    }
+    @else {
+        @media (max-width: $max) {
+            @content;
+        }
+    }
+}
+
+@function breakpoint-max($name, $breakpoint-list: $grid-breakpoint-list) {
+    $max: map-get($breakpoint-list, $name);
+
+    @return if($max != 0, $max, null);
+}
+
+@function breakpoint-infix($name, $breakpoint-list: $grid-breakpoint-list) {
+    @return if(breakpoint-max($name, $breakpoint-list) == null, "", "-#{$name}");
+}
+
+.container {
+    @include make-container;
+}
+
+@for $i from 1 through $infix-list-length {
+    .container-#{nth($breakpoint-infix-list, $i)} {
+        @include make-container();
+
+        @for $j from $i through 1 {
+            $infix: nth($breakpoint-infix-list, $j);
+            $screen-size: map-get($map: $grid-breakpoint-list, $key: $infix);
+            $max-width: map-get($map: $container-max-width-list, $key: $infix);
+            & {
+                @media screen and (max-width: $screen-size) {
+                    max-width: $max-width;
+                }
+            }
+        }
+    }
+}

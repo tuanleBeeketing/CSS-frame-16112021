@@ -1,0 +1,160 @@
+// Variables
+//
+// Variables should follow the `$component-state-property-size` formula for
+// consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
+
+// Color system
+
+// scss-docs-start gray-color-variables
+$white: #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black: #000 !default;
+
+// scss-docs-end gray-color-variables
+
+// fusv-disable
+// scss-docs-start gray-colors-map
+$gray-list: ("100": $gray-100, "200": $gray-200, "300": $gray-300, "400": $gray-400, "500": $gray-500, "600": $gray-600, "700": $gray-700, "800": $gray-800, "900": $gray-900) !default;
+
+// scss-docs-end gray-colors-map
+// fusv-enable
+
+// scss-docs-start basic color-variables
+$blue: #0d6efd !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #d63384 !default;
+$red: #dc3545 !default;
+$orange: #fd7e14 !default;
+$yellow: #ffc107 !default;
+$green: #198754 !default;
+$teal: #20c997 !default;
+$cyan: #0dcaf0 !default;
+
+// scss-docs-end color-variables
+
+//scss-docs-start bee-color
+$bee-color-purple-list: ( #e8ebff,  #b4beff,  #6378ff,  #2d46eb,  #000c5c);
+$bee-color-green-list: ( #ecfcf2,  #94e6af,  #32c864,  #008c2e,  #004e1a);
+$bee-color-yellow-list: ( #fff6e1,  #ffe4aa,  #ffcd64,  #e59b00,  #7d5400);
+$bee-color-red-list: ( #ffeeef,  #ffa6a8,  #ff595f,  #d21926,  #5a0005);
+$bee-color-blue-list: ( #def0ff,  #98d0ff,  #1e8ceb,  #0064bc,  #001d37);
+
+//scss-docs-end bee-color
+
+// scss-docs-start colors-map
+
+// scss-docs-end colors-map
+
+// scss-docs-start theme-color-variables
+$primary: nth($bee-color-blue-list,3) !default;
+$secondary: $gray-600 !default;
+$success: nth($bee-color-green-list,3) !default;
+$info: $cyan !default;
+$warning: nth($bee-color-yellow-list,3) !default;
+$danger: nth($bee-color-red-list,3)!default;
+$light: $gray-100 !default;
+$dark: $gray-900 !default;
+
+// scss-docs-end theme-color-variables
+
+// scss-docs-start theme-colors-map
+$theme-color-list: ("primary": $primary, "secondary": $secondary, "success": $success, "info": $info, "warning": $warning, "danger": $danger, "light": $light, "dark": $dark) !default;
+
+//break-point-list
+$grid-breakpoint-list: ("lg": 1440px, "md": 1024px, "sm": 768px, "xs": 480px) !default;
+
+$breakpoint-infix-list: map-keys($grid-breakpoint-list);
+$infix-list-length: length($breakpoint-infix-list);
+
+@debug $breakpoint-infix-list;
+
+@debug $infix-list-length;
+
+@debug nth($list: $breakpoint-infix-list, $n: 1);
+
+//max-width-list
+$container-max-width-list: ("lg": 1024px, "md": 768px, "sm": 480px, "xs": null) !default;
+
+//number of comlumn
+$number-of-column: 12 !default;
+
+//gutter-width-list
+$grid-gutter-width: 16px !default;
+
+$border-radius: 0.25rem !default;
+$border-radius-sm: 0.2rem !default;
+$border-radius-lg: 0.3rem !default;
+$border-radius-pill: 50rem !default;
+
+$box-shadow: 0 0.5rem 1rem rgba($black, 0.15) !default;
+$box-shadow-sm: 0 0.125rem 0.25rem rgba($black, 0.075) !default;
+$box-shadow-lg: 0 1rem 3rem rgba($black, 0.175) !default;
+$box-shadow-inset: inset 0 1px 2px rgba($black, 0.075) !default;
+
+$font-size-base: 16px !default;
+$h1-font-size: $font-size-base * 2.5 !default;
+$h2-font-size: $font-size-base * 2 !default;
+$h3-font-size: $font-size-base * 1.75 !default;
+$h4-font-size: $font-size-base * 1.5 !default;
+$h5-font-size: $font-size-base * 1.25 !default;
+$h6-font-size: $font-size-base !default;
+
+$spacer: 1rem !default;
+
+// scss-docs-start headings-variables
+$headings-margin-bottom: $spacer * 0.5 !default;
+$headings-font-family: null !default;
+$headings-font-style: null !default;
+$headings-font-weight: 500 !default;
+$headings-line-height: 1.2 !default;
+$headings-color: null !default;
+
+$paragraph-margin-bottom: 1rem !default;
+
+$font-weight-lighter: lighter !default;
+$font-weight-light: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-bold: 700 !default;
+$font-weight-bolder: bolder !default;
+
+$table-cell-padding-y: 0.5rem !default;
+$table-cell-padding-x: 0.5rem !default;
+$table-cell-padding-y-sm: 0.25rem !default;
+$table-cell-padding-x-sm: 0.25rem !default;
+$legend-margin-bottom: 0.5rem !default;
+$legend-font-size: 1.5rem !default;
+$legend-font-weight: null !default;
+
+$text-size-list: (1: 0.875rem, 2: 1rem, 3: 1.125rem, 4: 1.25rem, 5: 1.5rem);
+
+$heading-size-list: (1: 1.75rem, 2: 2.25rem, 3: 2.75rem, 4: 3.25rem, 5: 3.75rem);
+
+$spacing-unit: 0.625rem; //5px for 16px base font size
+$padding-list: (1: $spacing-unit * 1, 2: $spacing-unit * 2, 3: $spacing-unit * 3, 4: $spacing-unit * 4, 5: $spacing-unit * 5);
+
+$margin-list: (1: $spacing-unit * 1, 2: $spacing-unit * 2, 3: $spacing-unit * 3, 4: $spacing-unit * 4, 5: $spacing-unit * 5);
+
+$border-width-unit: 1px;
+$border-width-list: (1: $border-width-unit * 1, 2: $border-width-unit * 2, 3: $border-width-unit * 3, 4: $border-width-unit * 4, 5: $border-width-unit * 5);
+
+$side-list: ("t": "top", "r": "right", "b": "bottom", "l": "left");
+$composition-side-list: ("x": ("left", "right"), "y": ("top", "bottom"));
+
+
+$display-status-list:(
+"none",
+"inline",
+"inline-block",
+"block",
+"inline-flex"
+"flex",
+)

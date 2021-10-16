@@ -1,0 +1,44 @@
+@each $index, $value in $heading-size-list {
+    .h-#{$index} {
+        font-size: $value;
+    }
+}
+@each $index, $value in $text-size-list {
+    .t-#{$index} {
+        font-size: $value;
+    }
+}
+
+@each $index, $value in $theme-color-list {
+    .t-#{$index} {
+        color: $value;
+    }
+}
+@each $infix, $size in $grid-breakpoint-list {
+    @each $index, $value in $heading-size-list {
+        .h-#{$infix}-#{$index} {
+            @media screen and (max-width: $size) {
+                font-size: $value;
+            }
+        }
+    }
+
+    @each $index, $value in $text-size-list {
+        
+        .t-#{$infix}-#{$index} {
+            @media screen and (max-width: $size) {
+                font-size: $value;
+            }
+        }
+    }
+
+    @each $index, $value in $theme-color-list {
+         
+
+        .t-#{$infix}-#{$index} {
+            @media screen and (max-width: $size) {
+                color: $value;
+            }
+        }
+    }
+}

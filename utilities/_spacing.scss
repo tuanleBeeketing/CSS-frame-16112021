@@ -1,0 +1,99 @@
+.m-a{
+    margin: auto;
+}
+@each $padding-index, $padding in $padding-list {
+    .p-#{$padding-index}{
+        padding: $padding;
+    }
+    @each $side-index, $side in $composition-side-list {
+        .p-#{$side-index}-#{$padding-index} {
+            padding-#{nth($side, 1)}: $padding;
+            padding-#{nth($side, 2)}: $padding;
+        }
+    }
+    @each $side-index, $side in $side-list {
+        .p-#{$side-index}-#{$padding-index} {
+            padding-#{$side}: $padding;
+        }
+    }
+
+   
+}
+
+@each $margin-index, $margin in $margin-list {
+    .m-#{$margin-index}{
+        margin: $margin;
+    }
+    @each $side-index, $side in $composition-side-list {
+        .m-#{$side-index}-#{$margin-index} {
+            margin-#{nth($side, 1)}: $margin;
+            margin-#{nth($side, 2)}: $margin;
+        }
+    }
+    @each $side-index, $side in $side-list {
+        .m-#{$side-index}-#{$margin-index} {
+            margin-#{$side}: $margin;
+        }
+    }
+
+    
+}
+
+@each $infix, $size in $grid-breakpoint-list {
+    .m-#{$infix}-a {
+        @media screen and (max-width: $size) {
+            margin: auto;
+        }
+    }
+
+    @each $padding-index, $padding in $padding-list {
+        .p-#{$infix}-#{$padding-index} {
+            @media screen and (max-width: $size) {
+                padding: $padding;
+            }
+        }
+    
+        @each $side-index, $side in $composition-side-list {
+            .p-#{$side-index}-#{$infix}-#{$padding-index} {
+                @media screen and (max-width: $size) {
+                    padding-#{nth($side, 1)}: $padding;
+                    padding-#{nth($side, 2)}: $padding;
+                }
+            }
+        }
+        @each $side-index, $side in $side-list {
+            .p-#{$side-index}-#{$infix}-#{$padding-index} {
+                @media screen and (max-width: $size) {
+                    padding-#{$side}: $padding;
+                }
+            }
+        }
+
+        
+    }
+
+    @each $margin-index, $margin in $margin-list {
+        .m-#{$infix}-#{$margin-index}{
+            @media screen and (max-width: $size) {
+                margin: $margin;
+            }
+        }
+        @each $side-index, $side in $composition-side-list {
+            .m-#{$side-index}-#{$infix}-#{$margin-index} {
+                @media screen and (max-width: $size) {
+                    margin-#{nth($side, 1)}: $margin;
+                    margin-#{nth($side, 2)}: $margin;
+                }
+            }
+        }
+        @each $side-index, $side in $side-list {
+            .m-#{$side-index}-#{$infix}-#{$margin-index} {
+                @media screen and (max-width: $size) {
+                    margin-#{$side}: $margin;
+                }
+            }
+        }
+
+      
+    }
+}
