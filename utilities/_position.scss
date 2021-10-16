@@ -1,0 +1,10 @@
+@include class-all-position-all-breakpoint(position, pos, $postion-status-list);
+@include class-all-position-all-breakpoint(float, fl, $float-status-list);
+@include class-all-prop-value(z-index, z, $z-index-list);
+
+.pos-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}

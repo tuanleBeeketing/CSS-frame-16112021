@@ -1,0 +1,7 @@
+@include class-all-position-all-breakpoint(display,d,$display-status-list);
+@include class-all-position-all-breakpoint(flex-direction,fld,$flex-direction-list);
+@include class-all-position-all-breakpoint(flex-grow,flg,$flex-grow-list);
+@include class-all-position-all-breakpoint(flex-shrink,fls,$flex-shrink-list);
+@include class-all-position-all-breakpoint(order,od,$flex-order-list);
+@include class-all-position-all-breakpoint(justify-content,jc,$justify-content-status-list);
+@include class-all-position-all-breakpoint(align-items,ai,$align-items-status-list);

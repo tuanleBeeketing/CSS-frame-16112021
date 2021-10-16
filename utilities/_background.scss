@@ -1,0 +1,7 @@
+@include class-all-prop-value(background-color,bg,$background-color-list);
+@include class-all-prop-value(background-color,bg-gray,$gray-list,true);
+@include class-all-prop-value(background-color,bg-bee-purple,$bee-color-purple-list,true);
+@include class-all-prop-value(background-color,bg-bee-green,$bee-color-green-list,true);
+@include class-all-prop-value(background-color,bg-bee-yellow,$bee-color-yellow-list,true);
+@include class-all-prop-value(background-color,bg-bee-red,$bee-color-red-list,true);
+@include class-all-prop-value(background-color,bg-bee-blue,$bee-color-blue-list,true);

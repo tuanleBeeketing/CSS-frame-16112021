@@ -1,2 +1,10 @@
 @import "./reboot";
 @import "./typography";
+
+//bee-link,anchor link follow shopbase CSS
+.bee-link{
+   transition: color 0.3s ease;
+    &:hover{
+        color: $bee-link-color;
+    }
+}

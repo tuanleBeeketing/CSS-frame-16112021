@@ -18,11 +18,12 @@ $gray-800: #343a40 !default;
 $gray-900: #212529 !default;
 $black: #000 !default;
 
+
 // scss-docs-end gray-color-variables
 
 // fusv-disable
 // scss-docs-start gray-colors-map
-$gray-list: ("100": $gray-100, "200": $gray-200, "300": $gray-300, "400": $gray-400, "500": $gray-500, "600": $gray-600, "700": $gray-700, "800": $gray-800, "900": $gray-900) !default;
+$gray-list: ( $gray-100,  $gray-200,  $gray-300,  $gray-400,  $gray-500,  $gray-600,  $gray-700,  $gray-800,  $gray-900) !default;
 
 // scss-docs-end gray-colors-map
 // fusv-enable
@@ -42,11 +43,12 @@ $cyan: #0dcaf0 !default;
 // scss-docs-end color-variables
 
 //scss-docs-start bee-color
-$bee-color-purple-list: ( #e8ebff,  #b4beff,  #6378ff,  #2d46eb,  #000c5c);
-$bee-color-green-list: ( #ecfcf2,  #94e6af,  #32c864,  #008c2e,  #004e1a);
-$bee-color-yellow-list: ( #fff6e1,  #ffe4aa,  #ffcd64,  #e59b00,  #7d5400);
-$bee-color-red-list: ( #ffeeef,  #ffa6a8,  #ff595f,  #d21926,  #5a0005);
-$bee-color-blue-list: ( #def0ff,  #98d0ff,  #1e8ceb,  #0064bc,  #001d37);
+$bee-color-purple-list: #e8ebff, #b4beff, #6378ff, #2d46eb, #000c5c;
+$bee-color-green-list: #ecfcf2, #94e6af, #32c864, #008c2e, #004e1a;
+$bee-color-yellow-list: #fff6e1, #ffe4aa, #ffcd64, #e59b00, #7d5400;
+$bee-color-red-list: #ffeeef, #ffa6a8, #ff595f, #d21926, #5a0005;
+$bee-color-blue-list: #def0ff, #98d0ff, #1e8ceb, #0064bc, #001d37;
+$bee-link-color: #0093ED;
 
 //scss-docs-end bee-color
 
@@ -55,34 +57,29 @@ $bee-color-blue-list: ( #def0ff,  #98d0ff,  #1e8ceb,  #0064bc,  #001d37);
 // scss-docs-end colors-map
 
 // scss-docs-start theme-color-variables
-$primary: nth($bee-color-blue-list,3) !default;
+$primary: nth($bee-color-blue-list, 3) !default;
 $secondary: $gray-600 !default;
-$success: nth($bee-color-green-list,3) !default;
+$success: nth($bee-color-green-list, 3) !default;
 $info: $cyan !default;
-$warning: nth($bee-color-yellow-list,3) !default;
-$danger: nth($bee-color-red-list,3)!default;
+$warning: nth($bee-color-yellow-list, 3) !default;
+$danger: nth($bee-color-red-list, 3) !default;
 $light: $gray-100 !default;
 $dark: $gray-900 !default;
 
 // scss-docs-end theme-color-variables
 
 // scss-docs-start theme-colors-map
-$theme-color-list: ("primary": $primary, "secondary": $secondary, "success": $success, "info": $info, "warning": $warning, "danger": $danger, "light": $light, "dark": $dark) !default;
+$theme-color-list: (primary: $primary, secondary: $secondary, success: $success, info: $info, warning: $warning, danger: $danger, light: $light, dark: $dark) !default;
+$background-color-list: map-merge($map1: $theme-color-list, $map2: (trans: transparent, black: black));
 
 //break-point-list
-$grid-breakpoint-list: ("lg": 1440px, "md": 1024px, "sm": 768px, "xs": 480px) !default;
+$grid-breakpoint-list: (lg: 1440px, md: 1024px, sm: 768px, xs: 480px) !default;
 
 $breakpoint-infix-list: map-keys($grid-breakpoint-list);
 $infix-list-length: length($breakpoint-infix-list);
 
-@debug $breakpoint-infix-list;
-
-@debug $infix-list-length;
-
-@debug nth($list: $breakpoint-infix-list, $n: 1);
-
 //max-width-list
-$container-max-width-list: ("lg": 1024px, "md": 768px, "sm": 480px, "xs": null) !default;
+$container-max-width-list: (lg: 1024px, md: 768px, sm: 480px, xs: null) !default;
 
 //number of comlumn
 $number-of-column: 12 !default;
@@ -90,15 +87,14 @@ $number-of-column: 12 !default;
 //gutter-width-list
 $grid-gutter-width: 16px !default;
 
-$border-radius: 0.25rem !default;
-$border-radius-sm: 0.2rem !default;
-$border-radius-lg: 0.3rem !default;
-$border-radius-pill: 50rem !default;
+$border-radius-unit: 0.3125rem;
+$border-radius-list: (1: $border-radius-unit * 1, 2: $border-radius-unit * 2, 3: $border-radius-unit * 3, 4: $border-radius-unit * 5, 5: $border-radius-unit * 7, pill: 50rem);
 
 $box-shadow: 0 0.5rem 1rem rgba($black, 0.15) !default;
 $box-shadow-sm: 0 0.125rem 0.25rem rgba($black, 0.075) !default;
 $box-shadow-lg: 0 1rem 3rem rgba($black, 0.175) !default;
 $box-shadow-inset: inset 0 1px 2px rgba($black, 0.075) !default;
+$box-shadow-list: (small: $box-shadow-sm, null: $box-shadow, large: $box-shadow-lg, inset: $box-shadow-inset);
 
 $font-size-base: 16px !default;
 $h1-font-size: $font-size-base * 2.5 !default;
@@ -141,20 +137,23 @@ $heading-size-list: (1: 1.75rem, 2: 2.25rem, 3: 2.75rem, 4: 3.25rem, 5: 3.75rem)
 $spacing-unit: 0.625rem; //5px for 16px base font size
 $padding-list: (1: $spacing-unit * 1, 2: $spacing-unit * 2, 3: $spacing-unit * 3, 4: $spacing-unit * 4, 5: $spacing-unit * 5);
 
-$margin-list: (1: $spacing-unit * 1, 2: $spacing-unit * 2, 3: $spacing-unit * 3, 4: $spacing-unit * 4, 5: $spacing-unit * 5);
+$margin-list: (1: $spacing-unit * 1, 2: $spacing-unit * 2, 3: $spacing-unit * 3, 4: $spacing-unit * 4, 5: $spacing-unit * 5, auto: auto);
 
 $border-width-unit: 1px;
 $border-width-list: (1: $border-width-unit * 1, 2: $border-width-unit * 2, 3: $border-width-unit * 3, 4: $border-width-unit * 4, 5: $border-width-unit * 5);
 
-$side-list: ("t": "top", "r": "right", "b": "bottom", "l": "left");
-$composition-side-list: ("x": ("left", "right"), "y": ("top", "bottom"));
+$position-list: (t: top, r: right, b: bottom, l: left);
+$composition-position-list: (x: (left, right), y: (top, bottom));
 
+$display-status-list: none, inline, inline-block, block, inline-flex, flex;
+$justify-content-status-list: flex-start, flex-end, center, space-between, space-evenly, space-around;
+$align-items-status-list: flex-start, flex-end, center, stretch;
+$flex-direction-list: row, column, row-reverse, column-reverse;
+$flex-order-list: 1, 2, 3, 4;
+$flex-grow-list:1,2,3;
+$flex-shrink-list:1,2,3;
+$float-status-list: left, right, none;
+$z-index-list: 1, 2, 3, 4, 5, 6, 7, 8, 9;
+$postion-status-list: relative, absolute, fixed;
 
-$display-status-list:(
-"none",
-"inline",
-"inline-block",
-"block",
-"inline-flex"
-"flex",
-)
+$opacity-list: (0: 0, 1: 0.15, 2: 0.35, 3: 0.6, 4: 0.8, 5: 1);

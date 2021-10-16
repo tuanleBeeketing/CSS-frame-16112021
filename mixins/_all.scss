@@ -1,0 +1,138 @@
+@mixin class-all-position-all-breakpoint($prop-name, $prop-abbr, $prop-value-list, $position-list: null, $composition-position-list: null, $breakpoint-list: $grid-breakpoint-list, $use-index-as-key: false) {
+    @if type-of($prop-value-list) == "list" {
+        $new-map: ();
+
+        @if not $use-index-as-key {
+            @for $i from 1 through length($prop-value-list) {
+                $value: nth($prop-value-list, $i);
+                $new-map: map-merge($new-map, ($value: $value));
+            }
+        }
+        @else {
+            @for $i from 1 through length($prop-value-list) {
+                $value: nth($prop-value-list, $i);
+                $new-map: map-merge($new-map, ($i: $value));
+            }
+        }
+
+        $prop-value-list: $new-map;
+    }
+
+    @each $prop-index, $prop-value in $prop-value-list {
+        @if $prop-index {
+            .#{$prop-abbr}-#{$prop-index} {
+                #{$prop-name}: $prop-value;
+
+                @content;
+            }
+        }
+        @else {
+            .#{$prop-abbr} {
+                #{$prop-name}: $prop-value;
+
+                @content;
+            }
+        }
+    }
+
+    @each $infix, $size in $breakpoint-list {
+        @each $prop-index, $prop-value in $prop-value-list {
+            @if $prop-index {
+                .#{$prop-abbr}-#{$infix}-#{$prop-index} {
+                    #{$prop-name}: $prop-value;
+
+                    @content;
+                }
+            }
+            @else {
+                .#{$prop-abbr}-#{$infix} {
+                    #{$prop-name}: $prop-value;
+
+                    @content;
+                }
+            }
+        }
+
+        @if $composition-position-list {
+            @each $position-index, $position-value in $composition-position-list {
+                @each $prop-index, $prop-value in $prop-value-list {
+                    @if $prop-index {
+                        .#{$prop-abbr}-#{$position-index}-#{$infix}-#{$prop-index} {
+                            #{$prop-name}-#{nth($position-value, 1)}: $prop-value;
+                            #{$prop-name}-#{nth($position-value, 2)}: $prop-value;
+
+                            @content;
+                        }
+                    }
+                    @else {
+                        #{$prop-abbr}-#{$position-index}-#{$infix} {
+                            #{$prop-name}-#{nth($position-value, 1)}: $prop-value;
+                            #{$prop-name}-#{nth($position-value, 2)}: $prop-value;
+
+                            @content;
+                        }
+                    }
+                }
+            }
+        }
+
+        @if $position-list {
+            @each $position-index, $position-value in $position-list {
+                @each $prop-index, $prop-value in $prop-value-list {
+                    @if $prop-index {
+                        .#{$prop-abbr}-#{$position-index}-#{$infix}-#{$prop-index} {
+                            #{$prop-name}-#{$position-value}: $prop-value;
+
+                            @content;
+                        }
+                    }
+                    @else {
+                        .#{$prop-abbr}-#{$position-index}-#{$infix} {
+                            #{$prop-name}-#{$position-value}: $prop-value;
+
+                            @content;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin class-all-prop-value($prop-name, $prop-abbr, $prop-value-list, $use-index-as-key: false) {
+    @if type-of($prop-value-list) == "list" {
+        $new-map: ();
+
+        @if not $use-index-as-key {
+            @for $i from 1 through length($prop-value-list) {
+                $value: nth($prop-value-list, $i);
+                $new-map: map-merge($new-map, ($value: $value));
+            }
+        }
+        @else {
+            @for $i from 1 through length($prop-value-list) {
+                $value: nth($prop-value-list, $i);
+                $new-map: map-merge($new-map, ($i: $value));
+            }
+        }
+
+        $prop-value-list: $new-map;
+    }
+
+    @each $prop-index, $prop-value in $prop-value-list {
+        @if $prop-index {
+            .#{$prop-abbr}-#{$prop-index} {
+                #{$prop-name}: $prop-value;
+
+                @content;
+            }
+        }
+        @else {
+            .#{$prop-abbr} {
+                #{$prop-name}: $prop-value;
+
+                @content;
+            }
+        }
+    }
+}

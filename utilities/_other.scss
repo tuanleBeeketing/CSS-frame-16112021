@@ -1,0 +1,12 @@
+.ov-auto{
+    overflow: auto;
+}
+.ov-hidden{
+    overflow: hidden;
+}
+.ov-visible{
+    overflow: visible;
+}
+
+//opacity
+@include class-all-prop-value(opacity,op,$opacity-list);
