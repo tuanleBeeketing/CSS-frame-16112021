@@ -1,5 +1,7 @@
 @include class-all-position-all-breakpoint(font-size,t,$text-size-list);
 @include class-all-position-all-breakpoint(font-size,h,$heading-size-list);
+@include class-all-prop-value(line-height,lh,$line-height-list,true);
+@include class-all-prop-value(font-weight,fw,$font-weight-list);
 @include class-all-prop-value(color,t,$theme-color-list);
 @include class-all-prop-value(color,t-gray,$gray-list,true);
 @include class-all-prop-value(color,t-bee-purple,$bee-color-purple-list,true);

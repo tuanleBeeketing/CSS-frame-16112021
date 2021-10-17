@@ -1,10 +1,88 @@
-@import "./reboot";
-@import "./typography";
 
 //bee-link,anchor link follow shopbase CSS
-.bee-link{
-   transition: color 0.3s ease;
-    &:hover{
+.bee-link {
+    transition: color 0.3s ease;
+
+    &:hover {
         color: $bee-link-color;
     }
 }
+
+.btn {
+    display: inline-block;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 12px;
+    height: 30px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 8px;
+    transition-delay: 0s;
+    transition-duration: 0.2s;
+    transition-property: background-color;
+    transition-timing-function: ease-in;
+    vertical-align: top;
+    white-space: nowrap;
+    min-width: 120px;
+    color: black;
+    background-color: #fff;
+    border: 1px solid rgba(126, 125, 125, 0.3);
+    &:active{
+        filter: brightness(0.95);
+    }
+}
+
+@mixin generateButtonClass($theme-color-list: $theme-color-list, $secondary-color-list: $theme-color-list-active) {
+    @each $infix, $value in $theme-color-list {
+        .btn-#{$infix} {
+            color: white;
+            background-color: $value;
+
+            &:hover {
+                color: white;
+                filter: saturate(0.75) brightness(1.15);
+            }
+
+            &:active {
+                outline: 3px solid map-get($map: $secondary-color-list, $key: $infix);
+            }
+        }
+    }
+}
+
+@include generateButtonClass;
+
+ .btn-warning, .btn-info, .btn-light,.btn-success {
+    color: black;
+
+    &:hover {
+        color: black;
+    }
+}
+.btn-light{
+    &:hover{
+        filter: brightness(0.95);
+    }
+}
+
+@mixin generteClassMoveWhenHover($class-abbr,$direction-list:$position-list){
+    @each $infix,$direction in $direction-list {
+        .#{$class-abbr}-#{$infix}:hover{
+            position: relative;
+            @if($infix==l){
+                transform: translateX(-1px);
+            }
+            @if($infix==r){
+                transform: translateX(1px);
+            }
+            @if($infix==b){
+                transform: translateY(-1px);
+            }
+            @if($infix==t){
+                transform: translateY(-1px);
+            }
+        }
+    }
+};
+@include generteClassMoveWhenHover(hv-move);
